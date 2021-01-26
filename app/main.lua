@@ -6,4 +6,8 @@ app:get("/", function (c)
     c:send("Hello wlua!")
 end)
 
+app:get("/foo", function (c)
+    c:send("bar")
+end)
+
 app:run()
