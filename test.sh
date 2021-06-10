@@ -8,3 +8,10 @@ curl -H "Content-Type: application/json" -d '{"username":"xyz","password":"xyz"}
 
 curl -i http://127.0.0.1:8081/json
 
+curl -i http://127.0.0.1:8081/v1
+curl -i http://127.0.0.1:8081/v1/
+curl -i http://127.0.0.1:8081/v1/test
+curl -i http://127.0.0.1:8081/v1/login
+curl -i http://127.0.0.1:8081/v1/login/
+curl -i http://127.0.0.1:8081/v1/login/test
+

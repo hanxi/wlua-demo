@@ -30,4 +30,20 @@ app:set_no_route(function(c)
     c:send("Not found", 404)
 end)
 
+local handler = function (c)
+    local ret = string.format("the method was %s and index %d", c.req.method, c.index)
+    c:send(ret)
+end
+
+local v1 = app:group("/v1", function (c)
+    c:send("in v1")
+end)
+
+local login = v1:group("/login/", function (c)
+    c:send("in login/")
+end)
+
+v1:get("/test", handler)
+login:get("/test", handler)
+
 app:run()
