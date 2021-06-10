@@ -18,6 +18,14 @@ app:post("/foo/", function (c)
     c:send("bar/")
 end)
 
+app:get("/json", function (c)
+    local tbl = {
+        A = "AAA",
+        B = 111,
+    }
+    c:send_json(tbl)
+end)
+
 app:set_no_route(function(c)
     c:send("Not found", 404)
 end)
