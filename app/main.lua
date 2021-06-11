@@ -1,6 +1,6 @@
 local wlua = require "wlua"
 local log = require "log"
-local app = wlua:new()
+local app = wlua:default()
 local util_json = require "util.json"
 
 app:use(function(c)
