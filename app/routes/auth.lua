@@ -1,6 +1,7 @@
 return function(router)
 
 local config = require "config"
+local utils = require "app.utils"
 local ipairs = ipairs
 
 local users = config.get_tbl("app_users")
@@ -15,10 +16,12 @@ router:post("/login", function(c)
 
     for _, v in ipairs(users) do
         if v.username == username and v.password == password then
-            c.token.set("username", username)
+            local accesstoken = utils.gen_accesstoken(username)
+            c.token.set(accesstoken, username)
             c:send_json({
                 code = "OK",
                 msg = "登录成功",
+                accesstoken = accesstoken,
             })
             return
         end

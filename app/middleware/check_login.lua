@@ -2,14 +2,14 @@ local util_table = require "util.table"
 local log = require "log"
 
 local function is_login(c)
-    local login = false
     if c.token then
-        local username = c.token.get("username")
+        local accesstoken = c.req.headers["x-access-token"]
+        local username = c.token.get(accesstoken)
         if username and username ~= "" then
-            login = true
+            return true
         end
     end
-    return login
+    return false
 end
 
 local function check_login(whitelist)
