@@ -1,5 +1,6 @@
 local util_table = require "util.table"
 local log = require "log"
+local r3 = require "r3"
 
 local function is_login(c)
     if c.token then
@@ -13,14 +14,17 @@ local function is_login(c)
 end
 
 local function check_login(whitelist)
-    local whitehash = util_table.swap_key_value(whitelist)
+    local match_router = r3:new()
+    for _, path in pairs(whitelist) do
+        match_router:insert("GET", path, true)
+        log.debug("check_login, path:", path)
+    end
+    match_router:compile()
+    match_router:dump()
+
 	return function(c)
 		local request_path = c.req.path
-
-	    local in_white_list = false
-        if whitehash[request_path] then
-            in_white_list = true
-        end
+        local in_white_list = match_router:match(request_path, "GET")
 
         log.debug("check_login:", request_path, in_white_list)
 
