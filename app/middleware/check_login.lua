@@ -4,9 +4,10 @@ local r3 = require "r3"
 
 local function is_login(c)
     if c.token then
-        local accesstoken = c.req.headers["x-access-token"]
+        local accesstoken = c.req.headers["x-token"]
         local username = c.token.get(accesstoken)
         if username and username ~= "" then
+            c.token.set('username', username)
             return true
         end
     end

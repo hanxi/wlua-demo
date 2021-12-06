@@ -11,6 +11,9 @@ app:use(token_middleware())
 -- filter: add response header
 app:use(function(c)
     c:set_res_header('X-Powered-By', 'wlua framework')
+    c:set_res_header('Access-Control-Allow-Origin', '*')
+    c:set_res_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+    c:set_res_header('Access-Control-Allow-Headers', 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization')
     c:next()
 end)
 
@@ -20,18 +23,8 @@ app:use(check_login_middleware(whitelist))
 
 router(app) -- business routers and routes
 
-app:static_file("/favicon.ico", "favicon.ico")
 app:static_file("/", "index.html")
-app:static_dir("/static", "./")
-
-app:get("/t.txt", function (c)
-    log.debug("in t.txt")
-    c:file("t.txt")
-end)
-
-app:get("/x.jpg", function (c)
-    c:file("x.jpg")
-end)
+app:static_dir("/", "./")
 
 app:run()
 
