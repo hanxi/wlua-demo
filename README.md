@@ -4,7 +4,15 @@ wlua demo
 
 A demo for [wlua](https://github.com/hanxi/wlua)
 
-## Test
+## Try in docker
+
+```bash
+docker run -p 2888:2888 -d hanxi/wlua-demo:master
+```
+
+See website in browser <http://localhost:2888> .
+
+## Run this demo local
 
 Install wlua see [hanxi/wlua#readme](https://github.com/hanxi/wlua#readme) .
 
@@ -15,8 +23,6 @@ git sumodule update --init
 wlua start
 tail -F log/wlua.log
 ```
-
-See website in browser <http://localhost:2888> .
 
 ## HTTP API
 
