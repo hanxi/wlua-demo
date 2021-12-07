@@ -1,7 +1,7 @@
 local user_router = require("app.routes.user")
-local todo_router = require("app.routes.todo")
+local table_router = require("app.routes.table")
 
 return function(app)
     user_router(app:group("/user"))
-    todo_router(app:group("/todo"))
+    table_router(app:group("/table"))
 end

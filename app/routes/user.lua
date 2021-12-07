@@ -17,8 +17,6 @@ router:get("/info", function(c)
     })
 end)
 
-router:options("/login", function(c)
-end)
 router:post("/login", function(c)
     local username = c.req.body.username
     local password = c.req.body.password
