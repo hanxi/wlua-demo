@@ -6,8 +6,8 @@ local util_json = require "util.json"
 
 local function decode_data(text, des_key, padding)
     if not text or text == "" then return {} end
-	text = crypt.base64decode(text)
-	local decrypt_str = crypt.desdecode(des_key, text, crypt.padding[padding or "iso7816_4"])
+    text = crypt.base64decode(text)
+    local decrypt_str = crypt.desdecode(des_key, text, crypt.padding[padding or "iso7816_4"])
     local decode_obj = util_json.decode(decrypt_str)
     return decode_obj or {}
 end
@@ -16,7 +16,7 @@ local function encode_data(obj, des_key, padding)
     local default = "{}"
     local text = util_json.encode(obj) or default
     local c = crypt.desencode(des_key, text, crypt.padding[padding or "iso7816_4"])
-	return crypt.base64encode(c)
+    return crypt.base64encode(c)
 end
 
 local function parse_token(field, des_key)

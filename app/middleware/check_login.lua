@@ -26,25 +26,25 @@ local function check_login(whitelist)
     match_router:compile()
     match_router:dump()
 
-	return function(c)
-		local request_path = c.req.path
+    return function(c)
+        local request_path = c.req.path
         local in_white_list = match_router:match(request_path, "GET")
 
         log.debug("check_login:", request_path, in_white_list)
 
-	    if in_white_list then
-	        c:next()
-	    else
-	        if is_login(c) then
-	            c:next()
-	        else
-	            c:send_json({
+        if in_white_list then
+            c:next()
+        else
+            if is_login(c) then
+                c:next()
+            else
+                c:send_json({
                     code = "UN_LOGIN",
                     msg = "未登录",
                 })
-	        end
-	    end
-	end
+            end
+        end
+    end
 end
 
 return check_login
