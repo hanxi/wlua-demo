@@ -1,6 +1,6 @@
 local util_table = require "util.table"
 local log = require "log"
-local r3 = require "r3"
+local rax = require "rax"
 
 local function is_login(c)
     if c.token then
@@ -18,13 +18,13 @@ local function is_login(c)
 end
 
 local function check_login(whitelist)
-    local match_router = r3:new()
+    local match_router = rax:new()
     for _, path in pairs(whitelist) do
         match_router:insert("GET", path, true)
         log.debug("check_login, path:", path)
     end
     match_router:compile()
-    match_router:dump()
+    --match_router:dump()
 
     return function(c)
         local request_path = c.req.path
